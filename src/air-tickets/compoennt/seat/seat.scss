@@ -1,0 +1,231 @@
+$high-level-seat-color: violet;
+$middle-level-seat-color: yellow;
+$low-level-seat-color: lightblue;
+$border-color: lightgray;
+
+.plane {
+  @media screen and (max-width: 950px) {
+    justify-content: center;
+    display: flex;
+  }
+}
+
+.seat-chosen-container {
+  width: 70%;
+  justify-content: center;
+  display: flex;
+}
+
+.plane-header {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.seat-area {
+  display: block;
+  min-height: 90%;
+  border-bottom: 0;
+  border-top: 0;
+  margin-top: -15px;
+  padding-top: 10px;
+  width: fit-content;
+  max-width: 320px;
+
+  @media screen and (max-width: 950px) {
+    margin-top: 0;
+  }
+}
+
+.seat-row {
+  min-width: 320px;
+  padding: 0.5rem;
+  border-left: 2px solid lightgray;
+  border-right: 2px solid lightgray;
+  justify-content: center;
+  display: flex;
+  width: fit-content;
+
+  .seat {
+    display: inline-flex;
+  }
+}
+
+%seat-container {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 20%;
+  border: 2px solid $border-color;
+  background-color: white;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: black;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 0.1rem;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(236, 226, 226);
+  }
+}
+
+.row-number {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+}
+
+@mixin level-container($background-color) {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20%;
+  background-color: $background-color;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.seat-container {
+  @extend %seat-container;
+}
+
+.high-level-seat-container {
+  @extend %seat-container;
+
+  &::after {
+    @include level-container($high-level-seat-color);
+  }
+}
+
+.middle-level-seat-container {
+  @extend %seat-container;
+
+  &::after {
+    @include level-container($middle-level-seat-color);
+  }
+}
+
+.low-level-seat-container {
+  @extend %seat-container;
+
+  &::after {
+    @include level-container($low-level-seat-color);
+  }
+}
+
+.seat-alphabet-row {
+  margin-top: -2rem;
+  justify-content: space-between;
+  display: flex;
+  padding-left: 8px;
+  padding-right: 8px;
+
+  @media screen and (max-width: 950px) {
+    margin-top: 0;
+    position: relative;
+  }
+}
+
+.seat-alphabet {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  display: flex;
+  margin: 3px;
+}
+
+.left-wing {
+  display: inline-flex;
+  img {
+    display: flex;
+    position: relative;
+    min-width: 780px;
+  }
+}
+
+.right-wing {
+  display: inline-flex;
+  img {
+    display: flex;
+    position: relative;
+    min-width: 780px;
+    z-index: -1;
+  }
+}
+
+.plane-tail {
+  img {
+    display: flex;
+    left: -72%;
+    position: relative;
+    min-width: 780px;
+  }
+}
+
+.exit-row {
+  position: relative;
+
+  &::before {
+    content: "EXIT";
+    position: absolute;
+    left: -15%; /* 根據需要調整 */
+    top: 50%;
+    transform: translateY(-50%);
+    border-right: 5px solid lightgray;
+    padding-right: 5px;
+    border-top-left-radius: 10%;
+    border-bottom-left-radius: 10%;
+  }
+
+  &::after {
+    content: "EXIT";
+    position: absolute;
+    right: -15%;
+    top: 50%;
+    transform: translateY(-50%);
+    border-left: 5px solid lightgray;
+    padding-left: 5px;
+    border-top-right-radius: 10%;
+    border-bottom-right-radius: 10%;
+  }
+}
+
+.selected-seat {
+  background-color: lightgreen;
+}
+
+.disabled-seat {
+  background-color: lightgray;
+  cursor: not-allowed !important;
+  transition: none;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 20%;
+  border: 2px solid $border-color;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: black;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 0.1rem;
+  transition: background-color 0.2s ease-in-out;
+
+  &::after {
+    background-color: transparent;
+  }
+}

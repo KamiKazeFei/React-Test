@@ -1,0 +1,32 @@
+@use "tailwindcss";
+
+html {
+  width: 100%;
+  min-width: 100%;
+}
+
+body {
+  background-color: white;
+  color: black;
+}
+
+.dark {
+  background-color: #222;
+  color: white;
+}
+
+input {
+  border-radius: 10px;
+  padding: 0.75rem;
+  font-size: 25px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  border-color: white;
+  transition: background 0.2s ease-in-out;
+  margin: 1rem;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
