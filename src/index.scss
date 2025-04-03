@@ -1,5 +1,9 @@
 @use "tailwindcss";
 
+$font-color: black;
+$hover-color: rgb(110, 104, 104);
+$btn-background-color: rgb(43, 40, 40);
+
 html {
   width: 100%;
   min-width: 100%;

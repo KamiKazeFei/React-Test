@@ -8,36 +8,20 @@ export class OrderDetail {
   ticketType: TicketType = TicketType.ROUND_TRIP;
 
   /**
-   * 出發時間
+   * 出發機票資訊
    *
    * @type {Date}
    * @memberof Time
    */
-  departureTime?: Date;
+  departureTicketInfo?: TicketInfo;
 
   /**
-   * 到站時間
+   * 返程機票資訊
    *
    * @type {Date}
    * @memberof Time
    */
-  arrivalTime?: Date;
-
-  /**
-   * 出發地點
-   *
-   * @type {AirportLocation}
-   * @memberof OrderDetail
-   */
-  departureLocation?: AirportLocation;
-
-  /**
-   * 抵達地點
-   *
-   * @type {AirportLocation}
-   * @memberof OrderDetail
-   */
-  arrivalLocation?: AirportLocation;
+  returnTicketInfo?: TicketInfo;
 
   /**
    * 人數
@@ -62,6 +46,109 @@ export class OrderDetail {
    * @memberof OrderDetail
    */
   babyAmount: number = 0;
+
+  /**
+   * 總金額
+   *
+   * @readonly
+   * @type {number}
+   * @memberof OrderDetail
+   */
+  get totalPrice(): string {
+    const departureTotalPrice = (
+      this.departureTicketInfo?.extraPrice ?? []
+    ).reduce((prev, current) => {
+      return prev + current.price;
+    }, 0);
+
+    const returnTotalPrice = (this.returnTicketInfo?.extraPrice ?? []).reduce(
+      (prev, current) => {
+        return prev + current.price;
+      },
+      0
+    );
+
+    return Intl.NumberFormat().format(
+      (this.departureTicketInfo?.ticketPrice ?? 0) +
+        (this.returnTicketInfo?.ticketPrice ?? 0) +
+        departureTotalPrice +
+        returnTotalPrice
+    );
+  }
+}
+
+export interface TicketInfo {
+  /**
+   * 出發日期
+   *
+   * @type {Date}
+   * @memberof TicketInfo
+   */
+  departureDate: Date;
+
+  /**
+   * 出發地點
+   *
+   * @type {AirportLocation}
+   * @memberof TicketInfo
+   */
+  departureLocation?: AirportLocation;
+
+  /**
+   * 抵達日期
+   *
+   * @type {Date}
+   * @memberof TicketInfo
+   */
+  arrivalDate: Date;
+
+  /**
+   * 抵達地點
+   *
+   * @type {AirportLocation}
+   * @memberof TicketInfo
+   */
+  arrivalLocation?: AirportLocation;
+
+  /**
+   * 票價
+   *
+   * @type {number}
+   * @memberof TicketInfo
+   */
+  ticketPrice: number;
+
+  /**
+   * 額外票價
+   *
+   * @type {ExtraPrice}
+   * @memberof TicketInfo
+   */
+  extraPrice?: ExtraPrice[];
+}
+
+/**
+ * 額外票價
+ *
+ * @export
+ * @interface ExtraPrice
+ */
+export interface ExtraPrice {
+  /**
+   * 名稱
+   *
+   * @type {string}
+   * @memberof ExtraPrice
+   */
+  name: string;
+
+  /**
+   * 價格
+   *
+   * @type {number}
+   * @memberof ExtraPrice
+   */
+  price: number;
 }
 
 /**

@@ -1,0 +1,75 @@
+$border-color: lightgray;
+
+.start-ticket-select-area {
+  border-right: 3px solid $border-color;
+  .date-select-area {
+    margin-top: 1.5rem;
+    overflow-y: scroll;
+    border-right: 2px solid $border-color;
+    padding-right: 1rem;
+    height: calc(100vh - 350px);
+    &::-webkit-scrollbar {
+      display: none; /* 適用於 WebKit 瀏覽器（如 Chrome 和 Safari） */
+    }
+
+    &::after {
+      content: "▼";
+      font-size: 2rem;
+      color: var(--font-color);
+      position: absolute;
+      bottom: 2%;
+      left: 5%;
+    }
+  }
+}
+
+.return-ticket-select-area {
+  border-left: 3px solid $border-color;
+  .date-select-area {
+    margin-top: 1.5rem;
+    overflow-y: scroll;
+    border-left: 2px solid $border-color;
+    padding-left: 1rem;
+    height: calc(100vh - 350px);
+    &::-webkit-scrollbar {
+      display: none; /* 適用於 WebKit 瀏覽器（如 Chrome 和 Safari） */
+    }
+
+    &::after {
+      content: "▼";
+      font-size: 2rem;
+      color: var(--font-color);
+      position: absolute;
+      bottom: 2%;
+      right: 5%;
+    }
+  }
+}
+
+.date-block {
+  border-top-left-radius: 5%;
+  border-top-right-radius: 5%;
+  border-bottom: 3px solid orange;
+  padding: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+  align-items: center;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+
+  label {
+    border-bottom: 2px solid var(--font-color);
+    cursor: pointer;
+  }
+
+  &:hover {
+    background-color: var(--hover-color);
+  }
+
+  .selected {
+    background-color: var(--hover-color);
+  }
+}
